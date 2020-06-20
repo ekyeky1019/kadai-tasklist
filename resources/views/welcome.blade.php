@@ -3,6 +3,8 @@
 @section('content')
     @if (Auth::check())
         {{ Auth::user()->name }}
+        {{-- 一覧 --}}
+        @include('tasks.index')
     @else
         <div class="center jumbotron">
             <div class="text-center">

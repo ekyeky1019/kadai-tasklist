@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStatusToTasksTable extends Migration
+class AddUserIdToTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,11 @@ class AddStatusToTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             //
-            $table->string("status", 10);
+            $table->unsignedBigInteger("user_id");
             
+            // 外部キー制約
+            $table->foreign('user_id')->references('id')->on('users');
         });
-        
-        
     }
 
     /**
@@ -31,7 +31,7 @@ class AddStatusToTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             //
-            $table->dropColumn("status");
+            $table->dropColumn("user_id");
         });
     }
 }
